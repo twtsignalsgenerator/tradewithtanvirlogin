@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TWT FUTURE SIGNALS GENERATOR</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: #0a0f1a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      background-color: #121e2b;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      width: 350px;
+      animation: fadeInBox 2s ease;
+      transition: opacity 0.5s ease;
+    }
+
+    @keyframes fadeInBox {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .login-box h2 {
+      color: #00ffe7;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-shadow: 0 0 10px #00ffe7;
+      animation: glowText 2s infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #00ffe7; }
+      to { text-shadow: 0 0 20px #00bfff, 0 0 30px #00e6e6; }
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #1d2a3c;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      background: #243b55;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: linear-gradient(to right, #00bcd4, #3f51b5);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+
+    .login-box button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    }
+
+    .login-box button:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .loader {
+      border: 4px solid rgba(0, 255, 255, 0.1);
+      border-top: 4px solid #00ffe7;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+
+    footer {
+      background: #121e2b;
+      padding: 15px;
+      text-align: center;
+      color: white;
+      border-top: 1px solid #00ffe7;
+    }
+
+    footer a {
+      color: #00ff00;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="login-box" id="loginBox">
+      <h2>TWT FUTURE SIGNALS<br>GENERATOR</h2>
+      <form onsubmit="return loginUser(event)">
+        <input type="text" id="username" placeholder="Username" required />
+        <div style="position: relative;">
+          <input type="password" id="password" placeholder="Password" required />
+          <span onclick="togglePassword()" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); cursor: pointer; color: #00ffe7; font-size: 13px;" id="togglePwd">👁 Show</span>
+        </div>
+        <button type="submit" id="loginBtn">Login</button>
+        <div id="spinner" style="display: none;"><div class="loader"></div></div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    © TWT FUTURE SIGNALS GENERATOR | <a href="https://t.me/+anIfNjougNQ3YWFl" target="_blank">Join Our Telegram</a>
+  </footer>
+
+  <!-- ক্লিক সাউন্ড ফাইল -->
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const loginBtn = document.getElementById("loginBtn");
+
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      const toggle = document.getElementById("togglePwd");
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        toggle.textContent = "🙈 Hide";
+      } else {
+        pwd.type = "password";
+        toggle.textContent = "👁 Show";
+      }
+    }
+
+    function playClickSound() {
+      const sound = document.getElementById("clickSound");
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    loginBtn.addEventListener("click", playClickSound);
+
+    function loginUser(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const loginBox = document.getElementById("loginBox");
+      const spinner = document.getElementById("spinner");
+
+      loginBtn.disabled = true;
+      spinner.style.display = "block";
+
+      setTimeout(() => {
+        if (username === "TRADERTANVIR07" && password === "TWTVIP") {
+          loginBox.style.opacity = "0";
+          setTimeout(() => {
+            window.location.href = "file:///C:/Users/T.TANVIR/Desktop/Signal%20Generator/Signal%20Generator%20Main.html";
+          }, 500);
+        } else {
+          spinner.style.display = "none";
+          loginBtn.disabled = false;
+          loginBox.classList.add("shake");
+          setTimeout(() => loginBox.classList.remove("shake"), 500);
+          alert("Invalid credentials!");
+        }
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
