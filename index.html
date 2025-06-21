@@ -164,6 +164,22 @@
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
+    // Right click block
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Keyboard shortcuts block (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S)
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) || // Ctrl+Shift+I
+        (e.ctrlKey && (e.key === 'U' || e.key === 'u')) || // Ctrl+U
+        (e.ctrlKey && (e.key === 'S' || e.key === 's')) // Ctrl+S
+      ) {
+        e.preventDefault();
+        alert('This action is disabled on this website.');
+      }
+    });
+
     const loginBtn = document.getElementById("loginBtn");
 
     function togglePassword() {
