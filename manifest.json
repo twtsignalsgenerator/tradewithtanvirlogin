@@ -1,0 +1,21 @@
+{
+  "name": "TWT FUTURE SIGNALS GENERATOR",
+  "short_name": "TWT Signals",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#00ffe7",
+  "description": "A secure TWT future signal login system.",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
