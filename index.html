@@ -7,7 +7,6 @@
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="manifest" href="manifest.json" />
 
-<!-- Service Worker Register -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -163,20 +162,17 @@
     © TWT FUTURE SIGNALS GENERATOR | <a href="https://t.me/+anIfNjougNQ3YWFl" target="_blank">Join Our Telegram</a>
   </footer>
 
-  <!-- ক্লিক সাউন্ড ফাইল -->
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
   <script>
-    // Right click block
     document.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Keyboard shortcuts block (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S)
     document.addEventListener('keydown', function(e) {
       if (
         e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) || // Ctrl+Shift+I
-        (e.ctrlKey && (e.key === 'U' || e.key === 'u')) || // Ctrl+U
-        (e.ctrlKey && (e.key === 'S' || e.key === 's')) // Ctrl+S
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+        (e.ctrlKey && (e.key === 'U' || e.key === 'u')) ||
+        (e.ctrlKey && (e.key === 'S' || e.key === 's'))
       ) {
         e.preventDefault();
         alert('This action is disabled on this website.');
@@ -230,5 +226,15 @@
         }
       }, 1500);
     }
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log("Service Worker Registered", reg))
+          .catch(err => console.error("Service Worker Error", err));
+      });
+    }
+  </script>
 </body>
 </html>
