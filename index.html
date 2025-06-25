@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TWT FUTURE SIGNALS GENERATOR</title>
   <link rel="icon" href="logo.png" type="image/png">
-  <link rel="manifest" href="manifest.json" />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,6 +123,15 @@
       100% { transform: translateX(0); }
     }
 
+    #error-msg {
+      color: #ff4b5c;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      min-height: 20px;
+      font-size: 14px;
+    }
+
     footer {
       background: #121e2b;
       padding: 15px;
@@ -154,6 +162,7 @@
         </div>
         <button type="submit" id="loginBtn">Login</button>
         <div id="spinner" style="display: none;"><div class="loader"></div></div>
+        <p id="error-msg"></p>
       </form>
     </div>
   </div>
@@ -207,12 +216,15 @@
       const password = document.getElementById("password").value.trim();
       const loginBox = document.getElementById("loginBox");
       const spinner = document.getElementById("spinner");
+      const errorMsg = document.getElementById("error-msg");
 
       loginBtn.disabled = true;
       spinner.style.display = "block";
+      errorMsg.textContent = "";
 
       setTimeout(() => {
         if (username === "TRADERTANVIR06" && password === "TWTVIP50") {
+          errorMsg.textContent = "";
           loginBox.style.opacity = "0";
           setTimeout(() => {
             window.location.href = "https://twtsignalsgenerator.github.io/tradewithtanvirmain/";
@@ -221,19 +233,10 @@
           spinner.style.display = "none";
           loginBtn.disabled = false;
           loginBox.classList.add("shake");
+          errorMsg.textContent = "Invalid credentials! Please try again.";
           setTimeout(() => loginBox.classList.remove("shake"), 500);
-          alert("Invalid credentials!");
         }
       }, 1500);
-    }
-
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log("Service Worker Registered", reg))
-          .catch(err => console.error("Service Worker Error", err));
-      });
     }
   </script>
 </body>
