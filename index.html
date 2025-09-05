@@ -1,243 +1,232 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TWT FUTURE SIGNALS GENERATOR</title>
-  <link rel="icon" href="logo.png" type="image/png">
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      background-color: #0a0f1a;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .login-box {
-      background-color: #121e2b;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-      width: 350px;
-      animation: fadeInBox 2s ease;
-      transition: opacity 0.5s ease;
-    }
-
-    @keyframes fadeInBox {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .login-box h2 {
-      color: #00ffe7;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 24px;
-      text-shadow: 0 0 10px #00ffe7;
-      animation: glowText 2s infinite alternate;
-    }
-
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #00ffe7; }
-      to { text-shadow: 0 0 20px #00bfff, 0 0 30px #00e6e6; }
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background: #1d2a3c;
-      border: none;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-
-    .login-box input:focus {
-      outline: none;
-      background: #243b55;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
-
-    .login-box button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background: linear-gradient(to right, #00bcd4, #3f51b5);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-    }
-
-    .login-box button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-    }
-
-    .login-box button:active {
-      transform: scale(0.98);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
-
-    .loader {
-      border: 4px solid rgba(0, 255, 255, 0.1);
-      border-top: 4px solid #00ffe7;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
-      margin: 15px auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .shake {
-      animation: shake 0.4s;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      50% { transform: translateX(6px); }
-      75% { transform: translateX(-6px); }
-      100% { transform: translateX(0); }
-    }
-
-    #error-msg {
-      color: #ff4b5c;
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-      min-height: 20px;
-      font-size: 14px;
-    }
-
-    footer {
-      background: #121e2b;
-      padding: 15px;
-      text-align: center;
-      color: white;
-      border-top: 1px solid #00ffe7;
-    }
-
-    footer a {
-      color: #00ff00;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>TWT SIGNAL GENERATOR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<link rel="icon" href="logo.png" type="image/png" />
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #ffffff;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.card {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(8px);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: scroll;
+  scrollbar-width: none;       
+  -ms-overflow-style: none;    
+}
+.card::-webkit-scrollbar { display: none; }
+h2,h3 { color: #004aad; text-align: center; margin: 0 0 10px 0; letter-spacing: 0.5px; }
+label { display: block; margin-top: 12px; margin-bottom: 4px; font-weight: bold; color: #004aad; }
+select,input[type='number'] { width:100%; height:48px; padding:12px 15px; background:rgba(255,255,255,0.8); border:1px solid rgba(0,0,0,0.1); border-radius:12px; color:#004aad; font-size:14px; margin-bottom:8px; box-sizing:border-box; text-align:center; outline:none; }
+input[type='checkbox'] { margin-right:8px; transform:scale(1.1); accent-color:#007bff; }
+.button-container { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+button { flex:1 1 45%; height:50px; background:linear-gradient(145deg,#007bff,#3399ff); border:none; color:white; border-radius:12px; font-weight:bold; cursor:pointer; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+button:hover { background:linear-gradient(145deg,#0069d9,#1a83ff); transform:scale(1.05); }
+ul { list-style:none; padding-left:0; margin:0; }
+li { margin:6px 0; padding:6px 10px; border-radius:8px; font-size:13px; color:#004aad; background: rgba(0,0,0,0.05); }
+.error-message { color:#ff4b5c; font-size:13px; text-align:center; min-height:18px; }
+#animation-message { display:none; margin-top:12px; text-align:center; color:#007bff; font-size:15px; font-weight:bold; }
+@media (max-width:480px){ .card{ padding:16px; max-width:340px; } button{ flex:1 1 100%; } }
+</style>
 </head>
 <body>
-  <div class="content">
-    <div class="login-box" id="loginBox">
-      <h2>TWT FUTURE SIGNALS<br>GENERATOR</h2>
-      <form onsubmit="return loginUser(event)">
-        <input type="text" id="username" placeholder="Username" required />
-        <div style="position: relative;">
-          <input type="password" id="password" placeholder="Password" required />
-          <span onclick="togglePassword()" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); cursor: pointer; color: #00ffe7; font-size: 13px;" id="togglePwd">👁 Show</span>
-        </div>
-        <button type="submit" id="loginBtn">Login</button>
-        <div id="spinner" style="display: none;"><div class="loader"></div></div>
-        <p id="error-msg"></p>
-      </form>
-    </div>
-  </div>
+<div class="card">
+<h2>TWT SIGNAL GENERATOR</h2>
+<p style="text-align:center; color:#004aad">📅 <span id="current-date"></span> ⏰ <span id="current-time"></span></p>
 
-  <footer>
-    © TWT FUTURE SIGNALS GENERATOR | <a href="https://t.me/+anIfNjougNQ3YWFl" target="_blank">Join Our Telegram</a>
-  </footer>
+<h3>Available Assets:</h3>
+<select id="asset-select">
+  <option value="">Select an asset</option>
+  <option value="ALL_ASSETS">🌐 All Assets</option>
+</select>
 
-  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<h3>Number of Signals:</h3>
+<input type="number" id="signal-count" value="1" min="1" />
 
-  <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
+<h3>Signal Filter:</h3>
+<select id="filter-select">
+  <option value="ALL">All</option>
+  <option value="CALL">CALL</option>
+  <option value="PUT">PUT</option>
+</select>
 
-    document.addEventListener('keydown', function(e) {
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
-        (e.ctrlKey && (e.key === 'U' || e.key === 'u')) ||
-        (e.ctrlKey && (e.key === 'S' || e.key === 's'))
-      ) {
-        e.preventDefault();
-        alert('This action is disabled on this website.');
-      }
-    });
+<h3>Backtest Filter:</h3>
+<label><input type="checkbox" id="backtest-filter" /> Show only backtested signals (fewer signals)</label>
 
-    const loginBtn = document.getElementById("loginBtn");
+<div class="button-container">
+  <button id="generate-signals">Generate</button>
+  <button id="reset-signals">Reset</button>
+  <button id="copy-signals" style="display:none">Copy</button>
+</div>
 
-    function togglePassword() {
-      const pwd = document.getElementById("password");
-      const toggle = document.getElementById("togglePwd");
-      if (pwd.type === "password") {
-        pwd.type = "text";
-        toggle.textContent = "🙈 Hide";
-      } else {
-        pwd.type = "password";
-        toggle.textContent = "👁 Show";
-      }
-    }
+<p id="error-message" class="error-message"></p>
 
-    function playClickSound() {
-      const sound = document.getElementById("clickSound");
-      sound.currentTime = 0;
-      sound.play();
-    }
+<h3>Generated Signals:</h3>
+<ul id="signal-list"></ul>
+<div id="animation-message"><h3>🚀 Signals Ready!</h3></div>
+</div>
 
-    loginBtn.addEventListener("click", playClickSound);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+const availableAssets = [
+  'USDNGN-OTC','USDCOP-OTC','USDTRY-OTC','NZDCAD-OTC','NZDZPY-OTC','USDZAR-OTC','USDARS-OTC',
+  'USDPKR-OTC','USDBDT-OTC','CADCHF-OTC','USDJPY-OTC','USDPHP-OTC','USDMXN-OTC','USDINR-OTC',
+  'USDEGP-OTC','USDDZD-OTC','USD/BRL-OTC','JNJ-OTC','BA-OTC','PFE-OTC','MSFT-OTC','USCRUDE-OTC',
+  'UKBRENT-OTC','FB-OTC','MCD-OTC','EURUSD','GBPUSD','USDJPY','AUDUSD','USDCAD','USD/JPY','EURGBP',
+  'EURJPY','GBPJPY','AUDJPY','EURCHF','Bitcoin-OTC','Gold-OTC','Silver-OTC'
+];
 
-    function loginUser(event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const loginBox = document.getElementById("loginBox");
-      const spinner = document.getElementById("spinner");
-      const errorMsg = document.getElementById("error-msg");
+let signals = [];
 
-      loginBtn.disabled = true;
-      spinner.style.display = "block";
-      errorMsg.textContent = "";
+function formatTime(date){ return date.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); }
+function generateSignal(asset,time){ const direction = Math.random()<0.5?'CALL':'PUT'; return {asset,time,direction}; }
 
-      setTimeout(() => {
-        if (username === "TRADERTANVIR07" && password === "TWTVIP") {
-          errorMsg.textContent = "";
-          loginBox.style.opacity = "0";
-          setTimeout(() => {
-            window.location.href = "https://twtsignalsgenerator.github.io/tradewithtanvirmain/";
-          }, 500);
-        } else {
-          spinner.style.display = "none";
-          loginBtn.disabled = false;
-          loginBox.classList.add("shake");
-          errorMsg.textContent = "Invalid credentials! Please try again.";
-          setTimeout(() => loginBox.classList.remove("shake"), 500);
+function handleGenerateSignals(){
+  const generateBtn=document.getElementById('generate-signals');
+  const selectedAsset=document.getElementById('asset-select').value;
+  const totalSignals=Number(document.getElementById('signal-count').value);
+  const errorMessage=document.getElementById('error-message');
+  const filter=document.getElementById('filter-select').value;
+  const isBacktest=document.getElementById('backtest-filter').checked;
+
+  generateBtn.textContent='Generating...';
+
+  setTimeout(()=>{
+    generateBtn.textContent='Generate';
+    if(!selectedAsset){ errorMessage.textContent='Please select an asset!'; return; }
+    errorMessage.textContent='';
+
+    let newSignals=[];
+    let currentTime=new Date();
+    let baseProbability = 1;
+    if(isBacktest) baseProbability *= 0.85;
+    if(filter !== 'ALL') baseProbability *= 0.7;
+
+    if(selectedAsset === 'ALL_ASSETS'){
+      const assetCount = availableAssets.length;
+      const signalsPerAsset = Math.floor(totalSignals / assetCount);
+      const remainder = totalSignals % assetCount;
+
+      availableAssets.forEach((asset, idx) => {
+        let numSignals = signalsPerAsset + (idx < remainder ? 1 : 0);
+        for(let i=0;i<numSignals;i++){
+          let attempt=0;
+          while(attempt<20){
+            attempt++;
+            const timeStr=formatTime(currentTime);
+            const sig=generateSignal(asset,timeStr);
+            if(filter!=='ALL' && sig.direction!==filter){ currentTime=new Date(currentTime.getTime()+1*60000); continue; }
+            if(Math.random()>baseProbability){ currentTime=new Date(currentTime.getTime()+1*60000); continue; }
+            newSignals.push(sig);
+            currentTime=new Date(currentTime.getTime()+8*60000);
+            break;
+          }
         }
-      }, 1500);
+      });
+    } else {
+      let attemptCount=0;
+      while(newSignals.length<totalSignals && attemptCount<totalSignals*20){
+        attemptCount++;
+        const timeStr=formatTime(currentTime);
+        const sig=generateSignal(selectedAsset,timeStr);
+        if(filter!=='ALL' && sig.direction!==filter){ currentTime=new Date(currentTime.getTime()+1*60000); continue; }
+        if(Math.random()>baseProbability){ currentTime=new Date(currentTime.getTime()+1*60000); continue; }
+        newSignals.push(sig);
+        currentTime=new Date(currentTime.getTime()+8*60000);
+      }
     }
-  </script>
+
+    signals=newSignals;
+    displaySignals(newSignals);
+    showAnimation();
+  },500);
+}
+
+function displaySignals(newSignals){
+  const list=document.getElementById('signal-list');
+  list.innerHTML='';
+  newSignals.forEach(signal=>{
+    const li=document.createElement('li');
+    li.textContent=`${signal.asset} ➪ ${signal.time} - ${signal.direction}`;
+    list.appendChild(li);
+  });
+  document.getElementById('copy-signals').style.display='inline-block';
+  window.generatedSignals=newSignals;
+}
+
+document.getElementById('copy-signals').addEventListener('click',()=>{
+  const today=new Date();
+  const formattedDate=`${today.getDate()}|${today.getMonth()+1}|${today.getFullYear()}`;
+  const signalsText=window.generatedSignals.map(sig=>`❒ ${sig.asset} ➪ ${sig.time} - ${sig.direction}`).join('\n');
+  const finalText=`
+
+🛡️ RED DRAGON FUTURE SIGNALS 🛡️
+
+⚖️ UTC +06:00 (Dhaka, Bangladesh) 🇧🇩
+
+⛔️JUST AVOID GAP, LOW % & OPPOSITE TREND ⛔️
+
+⛏️ MARTINGALE : 1 STEP
+
+⏰1 MINUTES: 
+
+${signalsText}
+
+‼️ USE SAFETY MARGIN MUST ‼️
+`;
+  navigator.clipboard.writeText(finalText).then(()=>toastr.success('Signals copied to clipboard!')).catch(()=>toastr.error('Failed to copy signals'));
+});
+
+function showAnimation(){ const anim=document.getElementById('animation-message'); anim.style.display='block'; setTimeout(()=>anim.style.display='none',2000); }
+function handleResetSignals(){ signals=[]; document.getElementById('signal-list').innerHTML=''; document.getElementById('copy-signals').style.display='none'; }
+function updateDateTime(){ const now=new Date(); document.getElementById('current-date').textContent=now.toLocaleDateString(); document.getElementById('current-time').textContent=now.toLocaleTimeString('en-GB'); }
+
+availableAssets.forEach(asset=>{
+  const opt=document.createElement('option'); opt.value=asset; opt.textContent=asset;
+  document.getElementById('asset-select').appendChild(opt);
+});
+
+document.getElementById('generate-signals').addEventListener('click',handleGenerateSignals);
+document.getElementById('reset-signals').addEventListener('click',handleResetSignals);
+setInterval(updateDateTime,1000);
+
+// ===== Security Features =====
+document.addEventListener('contextmenu', e=>e.preventDefault());
+document.addEventListener('dragstart', e=>e.preventDefault());
+document.addEventListener('copy', e=>e.preventDefault());
+document.addEventListener('cut', e=>e.preventDefault());
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey && ['s','S','u','U','c','C'].includes(e.key)) || 
+     (e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='i') || e.key==='F12'){ 
+    e.preventDefault(); toastr.warning('This action is disabled!'); 
+  }
+});
+window.addEventListener('beforeunload', e=>{ e.preventDefault(); e.returnValue=''; });
+
+</script>
 </body>
 </html>
